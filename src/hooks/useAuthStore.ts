@@ -49,7 +49,8 @@ export const useAuthStore = () => {
       dispatch(onLogin({ uid: data.uid, name: data.name }));
     } catch (error) {
       const axiosError = error as AxiosError<{ msg: string }>;
-
+      console.log(axiosError);
+      
       const errorMessage = axiosError.response?.data?.msg || 'Error en el registro';
       dispatch(onLogout(errorMessage));
 
