@@ -26,6 +26,10 @@ export const TasksGrid = () => {
           <TaskCard key={task._id} {...task} />
         ))
       }
+
+      {
+        tasks.length === 0 && <span className="text-center my-20 text-lg text-gray-400">No hay tareas pendientes</span>
+      }
     </div>
   )
 }
