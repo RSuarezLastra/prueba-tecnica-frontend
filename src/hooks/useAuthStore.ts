@@ -27,6 +27,7 @@ export const useAuthStore = () => {
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('token-init-date', `${new Date().getTime()}`);
+
       dispatch(onLogin({ uid: data.uid, name: data.name }));
     } catch (error) {
       dispatch(onLogout('Credenciales incorrectas'));
@@ -47,10 +48,11 @@ export const useAuthStore = () => {
       });
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('token-init-date', `${new Date().getTime()}`);
+
       dispatch(onLogin({ uid: data.uid, name: data.name }));
     } catch (error) {
       const axiosError = error as AxiosError<{ msg: string }>;
-      console.log(axiosError);
       
       const errorMessage = axiosError.response?.data?.msg || 'Error en el registro';
       dispatch(onLogout(errorMessage));
@@ -77,6 +79,11 @@ export const useAuthStore = () => {
     }
 }
 
+const startLogout = () => {
+  localStorage.clear();
+  dispatch(onLogout());
+}
+
   return {
     status,
     user,
@@ -84,7 +91,8 @@ export const useAuthStore = () => {
 
     startLogin,
     startRegister,
-    checkAuthToken
+    checkAuthToken,
+    startLogout
   }
 
 }
