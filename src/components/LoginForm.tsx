@@ -28,7 +28,7 @@ export const LoginForm = () => {
       <div className="flex items-end mb-5">
         <Link
           to={'/auth/register'}
-          className="ms-2 text-sm font-medium text-gray-300">
+          className="ms-2 text-sm font-medium text-gray-300 hover:underline">
           Registrarse
         </Link>
       </div>
