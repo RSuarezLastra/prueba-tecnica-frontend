@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form"
 import Swal from 'sweetalert2';
 import { useAuthStore } from "../hooks";
@@ -99,6 +100,14 @@ export const RegisterForm = () => {
         className="text-white focus:ring-4 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900 focus:ring-purple-800 transition-all">
         Registrarse
       </button>
+
+      <div className="flex justify-center mt-2">
+        <Link
+          to={'/auth/login'}
+          className="text-smfont-medium text-gray-300 hover:underline">
+          ¿Ya tiene cuenta? Ingrese
+        </Link>
+      </div>
     </form>
   )
 }

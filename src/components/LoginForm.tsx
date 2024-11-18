@@ -56,19 +56,18 @@ export const LoginForm = () => {
         />
         {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
       </div>
-
-      <div className="flex items-end mb-5">
-        <Link
-          to={'/auth/register'}
-          className="ms-2 text-sm font-medium text-gray-300 hover:underline">
-          Registrarse
-        </Link>
-      </div>
       <button
         type="submit"
         className="text-white focus:ring-4 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900 focus:ring-purple-800 transition-all">
         iniciar sesión
       </button>
+      <div className="flex justify-center mt-4">
+        <Link
+          to={'/auth/register'}
+          className="text-sm text-center font-medium text-gray-300 hover:underline">
+          ¿No tiene cuenta? Registrese
+        </Link>
+      </div>
     </form>
   )
 }

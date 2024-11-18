@@ -15,7 +15,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: { xs: 360, sm: 400 },
   bgcolor: '#020617',
   border: '1px solid #4b5563',
   boxShadow: 24,
@@ -39,7 +39,7 @@ export const TaskCard = ({ _id, title, description }: Props) => {
     <div className="bg-purple-900 rounded-lg p-4 flex justify-between hover:bg-purple-900/90 hover:cursor-pointer">
       <div onClick={handleOpen}>
         <h2 className="text-lg font-semibold hover:underline">{title}</h2>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-xs">{description}</p>
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[280px]">{description}</p>
       </div>
       <button onClick={() => handleClick(_id)}>
         <DeleteOutlineIcon className='hover:text-red-500' />
