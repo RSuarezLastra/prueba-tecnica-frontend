@@ -1,9 +1,8 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-const api_url = import.meta.env.VITE_API_URL;
 
 export const apiClient = axios.create({
-  baseURL: api_url
+  baseURL: 'https://prueba-tecnica-backend-phi.vercel.app/api'
 });
 
 apiClient.interceptors.request.use(
