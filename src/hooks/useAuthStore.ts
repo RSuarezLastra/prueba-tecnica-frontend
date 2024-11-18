@@ -26,11 +26,12 @@ export const useAuthStore = () => {
   const startLogin = async ({ email, password }: LoginProps) => {
     try {
       const { data } = await apiClient.post('/auth/login', { email, password });
-
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('token-init-date', `${new Date().getTime()}`);
-
-      dispatch(onLogin({ uid: data.uid, name: data.name }));
+      if(data.ok){
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('token-init-date', `${new Date().getTime()}`);
+        dispatch(onLogin({ uid: data.uid, name: data.name }));
+        Swal.fire('Bienvenido', 'Inicio de sesión correcto', 'success');
+      }
     } catch (error) {
       dispatch(onLogout('Credenciales incorrectas'));
 
