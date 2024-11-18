@@ -12,7 +12,7 @@ interface Inputs {
 
 export const RegisterForm = () => {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>()
+  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
 
   const { errorMessage, startRegister } = useAuthStore();
 
@@ -21,9 +21,7 @@ export const RegisterForm = () => {
       Swal.fire('Error en la autenticación', errorMessage, 'error');
     }
 
-  }, [errorMessage])
-
-  console.log(watch('name'));
+  }, [errorMessage]);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     startRegister(data);
