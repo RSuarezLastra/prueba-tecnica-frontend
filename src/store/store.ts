@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { authSlice } from './authSlice'
+import { taskSlice } from './tasksSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
+    task: taskSlice.reducer,
   },
 })
 
