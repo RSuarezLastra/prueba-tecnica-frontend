@@ -38,7 +38,7 @@ export const TaskCard = ({ _id, title, description }: Props) => {
   return (
     <div className="bg-purple-900 rounded-lg p-4 flex justify-between hover:bg-purple-900/90 hover:cursor-pointer">
       <div onClick={handleOpen}>
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-lg font-semibold hover:underline">{title}</h2>
         <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-xs">{description}</p>
       </div>
       <button onClick={() => handleClick(_id)}>

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { apiClient } from "../api/apiClient";
 import { useAppSelector } from "../store";
-import { onAddNewTask, onDeleteTask, onLoadTask } from "../store/tasksSlice";
+import { onAddNewTask, onDeleteTask, onLoadTask, onUpdateTask } from "../store/tasksSlice";
 import Swal from "sweetalert2";
 
 interface Task {
@@ -22,6 +22,14 @@ export const useTaskStore = () => {
   const startSavingTask = async (task: Task) => {
 
     try {
+      if(task._id){
+        const { data } = await apiClient.put(`/tasks/update/${task._id}`, task);
+        if(data.ok){
+          dispatch(onUpdateTask(data.task))
+          Swal.fire('Tarea actualizada', 'Actualizado exitosamente', 'success');
+          return;
+        }
+      }
       const { data } = await apiClient.post('/tasks/new', task);
 
       if (data && data.task && data.task._id) {

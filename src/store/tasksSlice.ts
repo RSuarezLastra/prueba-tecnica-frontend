@@ -35,9 +35,16 @@ export const taskSlice = createSlice({
     },
     onDeleteTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter(task => task._id != action.payload);
+    },
+    onUpdateTask: (state, action: PayloadAction<Task>) => {
+        state.tasks = state.tasks.map( task => {
+          if(task._id === action.payload._id) return action.payload;
+
+          return task;
+        })
     }
 
   },
 });
 
-export const { onAddNewTask, onLoadTask, onDeleteTask, onLogoutTasks } = taskSlice.actions;
+export const { onAddNewTask, onLoadTask, onDeleteTask, onLogoutTasks, onUpdateTask } = taskSlice.actions;
