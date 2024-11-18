@@ -26,10 +26,6 @@ export const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     startRegister(data);
-
-    if (!errorMessage) {
-      Swal.fire('Bienvenido', 'Usuario creado exitosamente', 'success');
-    }
   }
 
   return (

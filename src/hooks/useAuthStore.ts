@@ -3,6 +3,7 @@ import { apiClient } from "../api/apiClient";
 import { useAppDispatch, useAppSelector } from "../store"
 import { clearError, onLogin, onLogout } from "../store/authSlice";
 import { onLogoutTasks } from "../store/tasksSlice";
+import Swal from "sweetalert2";
 
 interface LoginProps {
   email: string;
@@ -47,11 +48,12 @@ export const useAuthStore = () => {
         email, 
         password,
       });
-
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('token-init-date', `${new Date().getTime()}`);
-
-      dispatch(onLogin({ uid: data.uid, name: data.name }));
+      if(data.ok){
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('token-init-date', `${new Date().getTime()}`);
+        dispatch(onLogin({ uid: data.uid, name: data.name }));
+        Swal.fire('Bienvenido', 'Usuario creado exitosamente', 'success');
+      }
     } catch (error) {
       const axiosError = error as AxiosError<{ msg: string }>;
       
