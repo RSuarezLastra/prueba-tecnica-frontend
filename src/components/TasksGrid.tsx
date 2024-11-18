@@ -14,7 +14,7 @@ export const TasksGrid = () => {
   }, [])
 
   return (
-    <div className="w-[50%] mx-auto flex flex-col">
+    <div className="w-full p-2 sm:w-[50%] mx-auto flex flex-col my-4">
       {
         tasks?.map((task) => (
           <TaskCard {...task} />

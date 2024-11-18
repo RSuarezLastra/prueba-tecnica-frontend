@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Modal } from '@mui/material';
 import { TaskForm, TasksGrid } from '../components';
-import AddIcon from '@mui/icons-material/Add';
+import { Add, Logout } from '@mui/icons-material';
 
 const style = {
   position: 'absolute',
@@ -25,20 +25,31 @@ export const TasksPage = () => {
   return (
 
 
-    <div className="min-h-screen bg-neutral-900 text-gray-200 p-4">
-      <h1 className='text-center text-2xl'>Mis Tareas</h1>
+    <div className="min-h-screen bg-neutral-900 text-gray-200 p-4 relative">
+      <h1 className='text-center text-2xl my-4'>Mis Tareas</h1>
 
-      <div className="w-40">
-        <button
-          onClick={handleOpen}
-          className="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900  transition-all">
-            <AddIcon sx={{mr: 2}}/>
-          Nueva tarea
-        </button>
+      <div className='w-44 h-full flex flex-col items-center'>
+        <div className="w-40">
+          <button
+            onClick={handleOpen}
+            className="text-white font-medium rounded-md text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900  transition-all">
+            <Add sx={{ mr: 2 }} />
+            Nueva tarea
+          </button>
+        </div>
+
+        <div className="w-44 absolute bottom-3 left-0">
+          <button
+            onClick={handleOpen}
+            className="text-white font-medium rounded-md text-sm w-full px-5 py-2.5 text-center ">
+            <Logout sx={{ mr: 2 }} />
+            cerrar sesion
+          </button>
+        </div>
       </div>
 
 
-    <TasksGrid/>
+      <TasksGrid />
 
 
       <Modal
