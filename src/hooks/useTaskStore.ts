@@ -5,7 +5,7 @@ import { onAddNewTask, onDeleteTask, onLoadTask } from "../store/tasksSlice";
 import Swal from "sweetalert2";
 
 interface Task {
-  id?: string;
+  _id?: string;
   title: string;
   description: string;
   status: string;
@@ -24,10 +24,10 @@ export const useTaskStore = () => {
     try {
       const { data } = await apiClient.post('/tasks/new', task);
 
-      if (data && data.task && data.task.id) {
+      if (data && data.task && data.task._id) {
         const newTask = {
           ...task,
-          id: data.task.id,
+          _id: data.task._id,
           user: user ? user.id : ''
         };
         dispatch(onAddNewTask(newTask));
@@ -45,10 +45,10 @@ export const useTaskStore = () => {
 
   const startDeletingTask = async (id: string) => {
     try {
-      await apiClient(`/tasks/delete/${id}`);
+      await apiClient.delete(`/tasks/delete/${id}`);
       dispatch(onDeleteTask(id))
     } catch (error) {
-
+      console.log(error);
     }
   }
 

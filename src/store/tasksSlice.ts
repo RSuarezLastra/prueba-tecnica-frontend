@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Task {
-  id: string
+  _id: string
   title: string;
   description: string;
   status: string;
@@ -34,7 +34,7 @@ export const taskSlice = createSlice({
       state.tasks = [];
     },
     onDeleteTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.filter(task => task.id != action.payload);
+      state.tasks = state.tasks.filter(task => task._id != action.payload);
     }
 
   },

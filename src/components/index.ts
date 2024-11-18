@@ -3,3 +3,4 @@ export { RegisterForm } from './RegisterForm';
 export { TaskForm } from './TaskForm';
 export { TasksGrid } from './TasksGrid';
 export { TaskCard } from './TaskCard';
+export { TaskEditForm } from './TaskEditForm';
