@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { apiClient } from "../api/apiClient";
 import { useAppSelector } from "../store";
-import { onAddNewTask, onLoadTask } from "../store/tasksSlice";
+import { onAddNewTask, onDeleteTask, onLoadTask } from "../store/tasksSlice";
 import Swal from "sweetalert2";
 
 interface Task {
@@ -32,6 +32,8 @@ export const useTaskStore = () => {
         };
         dispatch(onAddNewTask(newTask));
 
+        Swal.fire('Tarea guardada', 'Creado exitosamente', 'success');
+
       } else {
         console.error("No se pudo obtener un ID de la respuesta de la API");
       }
@@ -41,10 +43,19 @@ export const useTaskStore = () => {
     }
   }
 
+  const startDeletingTask = async (id: string) => {
+    try {
+      await apiClient(`/tasks/delete/${id}`);
+      dispatch(onDeleteTask(id))
+    } catch (error) {
+
+    }
+  }
+
   const startLoadingTasks = async () => {
     try {
       const { data } = await apiClient.get('/tasks');
-      if(data.ok) dispatch(onLoadTask(data.tasks));
+      if (data.ok) dispatch(onLoadTask(data.tasks));
     } catch (error) {
       console.log(error);
     }
@@ -56,5 +67,6 @@ export const useTaskStore = () => {
 
     startSavingTask,
     startLoadingTasks,
+    startDeletingTask,
   }
 }

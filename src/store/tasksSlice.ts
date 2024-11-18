@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Task {
-  id?: string
+  id: string
   title: string;
   description: string;
   status: string;
@@ -27,15 +27,17 @@ export const taskSlice = createSlice({
     },
     onLoadTask: (state, action: PayloadAction<Task[]>) => {
       state.isLoading = false;
-      action.payload.forEach(task => {
-        const exist = state.tasks.some(stateTask => stateTask.id === task.id);
-        if (!exist) {
-          state.tasks.push(task)
-        }
-      })
+      state.tasks = action.payload;
     },
+    onLogoutTasks: (state) => {
+      state.isLoading = true;
+      state.tasks = [];
+    },
+    onDeleteTask: (state, action: PayloadAction<string>) => {
+      state.tasks = state.tasks.filter(task => task.id != action.payload);
+    }
 
   },
 });
 
-export const { onAddNewTask, onLoadTask } = taskSlice.actions;
+export const { onAddNewTask, onLoadTask, onDeleteTask, onLogoutTasks } = taskSlice.actions;

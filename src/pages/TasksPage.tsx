@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Modal } from '@mui/material';
 import { TaskForm, TasksGrid } from '../components';
 import { Add, Logout } from '@mui/icons-material';
+import { useAuthStore } from '../hooks';
 
 const style = {
   position: 'absolute',
@@ -17,6 +18,8 @@ const style = {
 };
 
 export const TasksPage = () => {
+
+  const { startLogout } = useAuthStore();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -40,10 +43,10 @@ export const TasksPage = () => {
 
         <div className="w-44 absolute bottom-3 left-0">
           <button
-            onClick={handleOpen}
+            onClick={startLogout}
             className="text-white font-medium rounded-md text-sm w-full px-5 py-2.5 text-center ">
             <Logout sx={{ mr: 2 }} />
-            cerrar sesion
+            Cerrar sesión
           </button>
         </div>
       </div>
@@ -59,7 +62,7 @@ export const TasksPage = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <TaskForm />
+          <TaskForm handleClose={handleClose} />
         </Box>
       </Modal>
 

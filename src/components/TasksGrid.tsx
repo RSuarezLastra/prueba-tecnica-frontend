@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { useTaskStore } from "../hooks";
 import { TaskCard } from "./TaskCard";
 
-
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  user?: string;
+}
 
 
 export const TasksGrid = () => {
@@ -14,9 +20,9 @@ export const TasksGrid = () => {
   }, [])
 
   return (
-    <div className="w-full p-2 sm:w-[50%] mx-auto flex flex-col my-4">
+    <div className="w-full p-2 sm:w-[50%] mx-auto flex flex-col my-4 gap-2">
       {
-        tasks?.map((task) => (
+        tasks?.map((task: Task) => (
           <TaskCard {...task} />
         ))
       }

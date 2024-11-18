@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { apiClient } from "../api/apiClient";
 import { useAppDispatch, useAppSelector } from "../store"
 import { clearError, onLogin, onLogout } from "../store/authSlice";
+import { onLogoutTasks } from "../store/tasksSlice";
 
 interface LoginProps {
   email: string;
@@ -82,6 +83,7 @@ export const useAuthStore = () => {
 const startLogout = () => {
   localStorage.clear();
   dispatch(onLogout());
+  dispatch(onLogoutTasks());
 }
 
   return {

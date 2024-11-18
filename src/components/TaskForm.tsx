@@ -7,14 +7,20 @@ interface Inputs {
   description: string;
 }
 
-export const TaskForm = () => {
+
+interface Props {
+  handleClose: () => void; 
+}
+
+export const TaskForm = ({ handleClose }: Props) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
   const { startSavingTask } = useTaskStore();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
-    startSavingTask({ ...data, status: 'pendiente' });
+    await startSavingTask({ ...data, status: 'pendiente' });
+    handleClose();
   }
 
   return (
