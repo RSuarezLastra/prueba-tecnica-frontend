@@ -24,8 +24,18 @@ export const taskSlice = createSlice({
   reducers: {
     onAddNewTask: (state, action: PayloadAction<Task>) => {
       state.tasks.push(action.payload);
-    }
+    },
+    onLoadTask: (state, action: PayloadAction<Task[]>) => {
+      state.isLoading = false;
+      action.payload.forEach(task => {
+        const exist = state.tasks.some(stateTask => stateTask.id === task.id);
+        if (!exist) {
+          state.tasks.push(task)
+        }
+      })
+    },
+
   },
 });
 
-export const { onAddNewTask } = taskSlice.actions;
+export const { onAddNewTask, onLoadTask } = taskSlice.actions;

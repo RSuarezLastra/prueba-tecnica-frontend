@@ -25,9 +25,9 @@ export const LoginForm = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     startLogin(data);
 
-    if (!errorMessage) {
-      Swal.fire('Bienvenido', 'Usuario loggeado correctamente', 'success');
-    }
+    // if (!errorMessage) {
+    //   Swal.fire('Bienvenido', 'Usuario loggeado correctamente', 'success');
+    // }
   }
 
   return (

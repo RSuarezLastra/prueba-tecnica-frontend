@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { apiClient } from "../api/apiClient";
 import { useAppSelector } from "../store";
-import { onAddNewTask } from "../store/tasksSlice";
+import { onAddNewTask, onLoadTask } from "../store/tasksSlice";
 import Swal from "sweetalert2";
 
 interface Task {
@@ -37,7 +37,16 @@ export const useTaskStore = () => {
       }
     } catch (error) {
       console.log(error);
-      
+
+    }
+  }
+
+  const startLoadingTasks = async () => {
+    try {
+      const { data } = await apiClient.get('/tasks');
+      if(data.ok) dispatch(onLoadTask(data.tasks));
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -46,5 +55,6 @@ export const useTaskStore = () => {
     tasks,
 
     startSavingTask,
+    startLoadingTasks,
   }
 }

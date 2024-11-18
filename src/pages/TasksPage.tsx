@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Modal } from '@mui/material';
-import { TaskForm } from '../components';
-
+import { TaskForm, TasksGrid } from '../components';
+import AddIcon from '@mui/icons-material/Add';
 
 const style = {
   position: 'absolute',
@@ -25,16 +25,21 @@ export const TasksPage = () => {
   return (
 
 
-    <div className="min-h-screen bg-neutral-900 text-white p-4">
+    <div className="min-h-screen bg-neutral-900 text-gray-200 p-4">
       <h1 className='text-center text-2xl'>Mis Tareas</h1>
 
       <div className="w-40">
         <button
           onClick={handleOpen}
           className="text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900  transition-all">
+            <AddIcon sx={{mr: 2}}/>
           Nueva tarea
         </button>
       </div>
+
+
+    <TasksGrid/>
+
 
       <Modal
         open={open}
@@ -46,6 +51,7 @@ export const TasksPage = () => {
           <TaskForm />
         </Box>
       </Modal>
+
 
 
     </div>
