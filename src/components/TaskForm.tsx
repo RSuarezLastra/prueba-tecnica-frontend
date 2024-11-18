@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTaskStore } from '../hooks';
 
 
 interface Inputs {
@@ -9,10 +10,11 @@ interface Inputs {
 export const TaskForm = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>()
+  const { startSavingTask } = useTaskStore();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
 
-
+    startSavingTask({ ...data, status: 'pendiente' });
   }
 
   return (
