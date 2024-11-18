@@ -1,10 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { LoginPage } from "../pages";
+import { LoginPage, RegisterPage } from "../pages";
 
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path='/auth/*' element={<LoginPage />} />
+      <Route path='/auth/login' element={<LoginPage />} />
+      <Route path='/auth/register' element={<RegisterPage />} />
       <Route path='/*' element={<Navigate to='/auth/login' />} />
     </Routes >
   )
