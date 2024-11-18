@@ -7,14 +7,19 @@ export const AppRouter = () => {
 
   const { checkAuthToken, status } = useAuthStore();
 
-  
+
   useEffect(() => {
     checkAuthToken();
-}, []);
+  }, []);
+
+  if (status === 'checking') {
+    return (
+        <h3>Cargando...</h3>
+    )
+}
 
   return (
 
-    
     <Routes>
       {
         (status === 'not-authenticated') ? (
@@ -27,6 +32,7 @@ export const AppRouter = () => {
           : (
             <>
               <Route path='/' element={<TasksPage />} />
+              <Route path='/*' element={<Navigate to='/' />} />
             </>
           )
       }

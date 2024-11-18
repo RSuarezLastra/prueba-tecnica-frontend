@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-const api_url = import.meta.env.VITE_API_URL;
+const api_url = import.meta.env.VITE_API_DEV;
 
 export const apiClient = axios.create({
   baseURL: api_url

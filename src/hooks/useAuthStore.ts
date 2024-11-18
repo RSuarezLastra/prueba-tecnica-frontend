@@ -26,6 +26,7 @@ export const useAuthStore = () => {
       const { data } = await apiClient.post('/auth/login', { email, password });
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('token-init-date', `${new Date().getTime()}`);
       dispatch(onLogin({ uid: data.uid, name: data.name }));
     } catch (error) {
       dispatch(onLogout('Credenciales incorrectas'));
