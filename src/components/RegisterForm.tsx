@@ -99,7 +99,7 @@ export const RegisterForm = () => {
 
       <div className="flex justify-center mt-2">
         <Link
-          to={'/auth/login'}
+          to={'/'}
           className="text-smfont-medium text-gray-300 hover:underline">
           ¿Ya tiene cuenta? Ingrese
         </Link>
