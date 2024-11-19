@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Box, Modal } from '@mui/material';
+import { Box, Button, Menu, MenuItem, Modal } from '@mui/material';
 import { TaskForm, TasksGrid } from '../components';
-import { Add, Logout } from '@mui/icons-material';
+import { Add, Logout, AccountCircle } from '@mui/icons-material';
 import { useAuthStore } from '../hooks';
+
 
 const style = {
   position: 'absolute',
@@ -19,41 +20,69 @@ const style = {
 
 export const TasksPage = () => {
 
-  const { startLogout } = useAuthStore();
+  const { startLogout, user } = useAuthStore();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
 
 
-    <div className="min-h-screen bg-neutral-900 text-gray-200 p-4 relative">
-      <h1 className='text-center text-2xl my-4'>Mis Tareas</h1>
+    <div className="min-h-screen bg-neutral-900 text-gray-200 p-5 relative">
 
-      <div className='w-44 h-full flex flex-col items-center'>
-        <div className="w-40">
+      <div className='w-full flex items-center justify-between'>
+        <div>
           <button
             onClick={handleOpen}
-            className="text-white font-medium rounded-md text-sm w-full px-5 py-2.5 text-center bg-purple-800 hover:bg-purple-900  transition-all">
-            <Add sx={{ mr: 2 }} />
-            Nueva tarea
+            className="text-white font-medium rounded-xl sm:rounded-lg text-sm w-full p-2 sm:px-5 py-2 text-center bg-violet-800 hover:bg-violet-900  transition-all">
+            <Add sx={{ mr: { xs: 0, sm: 2 } }} />
+            <span className='hidden sm:inline'>Nueva tarea</span>
           </button>
         </div>
 
-        <div className="w-44 absolute bottom-3 left-0">
-          <button
-            onClick={startLogout}
-            className="text-white font-medium rounded-md text-sm w-full px-5 py-2.5 text-center ">
-            <Logout sx={{ mr: 2 }} />
-            Cerrar sesión
-          </button>
+        <div>
+          <Button
+            color='secondary'
+            className='text-white mr-4'
+            onClick={handleClick}
+          >
+            <AccountCircle className='text-white mr-2' />
+            <span className='text-white text-xs sm:text-sm'>{user.name}</span>
+          </Button>
+
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={openMenu}
+            onClose={handleCloseMenu}
+            sx={{
+              '& .MuiPaper-root': {
+                backgroundColor: '#4e4646',
+              },
+            }}
+
+          >
+            <MenuItem onClick={startLogout} >
+              <Logout sx={{ mr: 1, fontSize: 18, color: 'white' }} />
+              <span className='text-white'>cerrar sesion</span>
+            </MenuItem>
+          </Menu>
         </div>
       </div>
 
+      <h1 className='text-center text-2xl my-4'>Mis Tareas</h1>
 
       <TasksGrid />
-
 
       <Modal
         open={open}

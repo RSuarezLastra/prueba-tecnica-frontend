@@ -36,10 +36,10 @@ export const TaskCard = ({ _id, title, description }: Props) => {
   }
 
   return (
-    <div className="bg-purple-900 rounded-lg p-4 flex justify-between hover:bg-purple-900/90 hover:cursor-pointer">
+    <div className="bg-violet-950 rounded-lg p-4 flex justify-between hover:bg-violet-900/70 hover:cursor-pointer">
       <div onClick={handleOpen}>
-        <h2 className="text-lg font-semibold hover:underline">{title}</h2>
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-[280px]">{description}</p>
+        <h2 className="font-semibold hover:underline">{title}</h2>
+        <p className="overflow-hidden text-sm text-ellipsis whitespace-nowrap max-w-[280px]">{description}</p>
       </div>
       <button onClick={() => handleClick(_id)}>
         <DeleteOutlineIcon className='hover:text-red-500' />
